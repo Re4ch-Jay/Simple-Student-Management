@@ -25,7 +25,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
+    Route::resource('student', StudentController::class);
+
     Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
     Route::get('/major/create', [MajorController::class, 'create'])->name('major.create');
 

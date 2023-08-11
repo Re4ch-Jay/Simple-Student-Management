@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('phone_number');
             $table->string('gender');
+            $table->string('email');
             $table->foreignId('major_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

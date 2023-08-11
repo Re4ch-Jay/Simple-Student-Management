@@ -23,6 +23,7 @@ class StudentFactory extends Factory
             'dob' => fake()->date(),
             'pob' => fake()->address(),
             'address' => fake()->address(),
+            'email' => fake()->email(),
             'phone_number' => fake()->phoneNumber(),
             'gender' => fake()->randomElement(['Male', 'Female']),
             'major_id' => rand(1, 3),

@@ -25,6 +25,7 @@ class TeacherFactory extends Factory
             'phone_number' => fake()->phoneNumber(),
             'gender' => fake()->randomElement(['Male', 'Female']),
             'major_id' => rand(1, 3),
+            'email' => fake()->email(),
             'subject' => fake()->randomElement(['Database', 'Web', 'Mobile', 'Algorithm']),
         ];
     }

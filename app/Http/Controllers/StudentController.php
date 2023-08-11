@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -21,7 +22,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        $majors = Major::query()->get();
+        return view('students.create', [
+            'majors' => $majors,
+        ]);
     }
 
     /**
@@ -29,7 +33,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'dob' => ['required'],
+            'pob' => ['required'],
+            'address' => ['required'],
+            'phone_number' => ['required'],
+            'gender' => ['required'],
+            'email' => ['required', 'unique:' . Student::class],
+            'major_id' => ['required'],
+        ]);
+
+        Student::create($validated);
+
+        return redirect('/dashboard');
     }
 
     /**
