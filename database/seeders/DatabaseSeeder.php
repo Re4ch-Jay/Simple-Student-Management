@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Major;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +18,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Panhareach Phat',
+            'email' => 'panhareach.phat@student.cadt.edu.kh',
+            'password' => '12345678',
+        ]);
+
+        Major::factory(3)->create();
+        Student::factory(500)->create();
+        Teacher::factory(20)->create();
     }
 }

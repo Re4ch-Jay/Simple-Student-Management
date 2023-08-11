@@ -21,7 +21,7 @@ class MajorController extends Controller
      */
     public function create()
     {
-        //
+        return view('majors.create');
     }
 
     /**

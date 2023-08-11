@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('dob');
             $table->text('pob');
             $table->text('address');
-            $table->integer('phone_number');
+            $table->string('phone_number');
             $table->string('gender');
             $table->foreignId('major_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

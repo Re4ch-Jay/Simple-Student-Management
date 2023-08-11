@@ -1,4 +1,4 @@
-@props(['name'])
+@props(['name', 'url_create', 'url_info'])
 <li>
     <button 
     type="button" 
@@ -17,7 +17,7 @@
     id="{{ $name }}" 
     class="hidden py-2 space-y-2">
           <li>
-             <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">{{ $name }} Registration</a>
+             <a href="{{ $url_create }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">{{ $name }} Registration</a>
           </li>
           <li>
              <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">{{ $name }} Info</a>

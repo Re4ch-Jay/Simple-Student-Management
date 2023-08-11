@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('subject');
             $table->foreignId('major_id')->constrained()->cascadeOnDelete();
             $table->text('address');
-            $table->integer('phone_number');
+            $table->string('phone_number');
             $table->string('gender');
             $table->timestamps();
         });
