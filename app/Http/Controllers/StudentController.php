@@ -14,7 +14,12 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::query()->latest()->paginate(20);
+
+
+        return view('students.index', [
+            'students' => $students,
+        ]);
     }
 
     /**
@@ -39,7 +44,7 @@ class StudentController extends Controller
             'dob' => ['required'],
             'pob' => ['required'],
             'address' => ['required'],
-            'phone_number' => ['required'],
+            'phone_number' => ['required', 'numeric'],
             'gender' => ['required'],
             'email' => ['required', 'unique:' . Student::class],
             'major_id' => ['required'],
@@ -47,7 +52,7 @@ class StudentController extends Controller
 
         Student::create($validated);
 
-        return redirect('/dashboard');
+        return redirect(route('student.index'));
     }
 
     /**
@@ -63,7 +68,11 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        $majors = Major::query()->get();
+        return view('students.edit', [
+            'majors' => $majors,
+            'student' => $student,
+        ]);
     }
 
     /**
@@ -71,7 +80,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $validated = $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'dob' => ['required'],
+            'pob' => ['required'],
+            'address' => ['required'],
+            'phone_number' => ['required', 'numeric'],
+            'gender' => ['required'],
+            'email' => ['required'],
+            'major_id' => ['required'],
+        ]);
+
+        $student->update($validated);
+
+        return redirect(route('student.index'));
     }
 
     /**
@@ -79,6 +102,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+
+        return back();
     }
 }

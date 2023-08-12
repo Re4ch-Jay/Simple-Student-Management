@@ -40,7 +40,7 @@
          <x-forms.input type="text" name="address" label="Address"/>
       </div>
       <div class="relative z-0 w-full mb-6 group">
-         <x-forms.input type="text" name="phone_number" label="Phone Number"/>
+         <x-forms.input type="tel" name="phone_number" label="Phone Number"/>
       </div>
     </div>
     <x-forms.button-submit/>

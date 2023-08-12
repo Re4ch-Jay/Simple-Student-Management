@@ -20,7 +20,7 @@
              <a href="{{ $url_create }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">{{ $name }} Registration</a>
           </li>
           <li>
-             <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">{{ $name }} Info</a>
+             <a href="{{ $url_info }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">{{ $name }} Info</a>
           </li>
     </ul>
  </li>
