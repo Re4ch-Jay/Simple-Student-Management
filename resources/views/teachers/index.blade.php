@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-header name="Teachers List"/>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+       <x-search-bar action="{{ route('teacher.index') }}"/>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>

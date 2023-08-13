@@ -13,7 +13,7 @@ class MajorController extends Controller
      */
     public function index()
     {
-        $majors = Major::query()->latest()->paginate(20);
+        $majors = Major::query()->filter(request(['search']))->latest()->paginate(20);
         return view('majors.index', [
             'majors' => $majors,
         ]);

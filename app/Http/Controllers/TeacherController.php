@@ -14,7 +14,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::query()->latest()->paginate(20);
+        $teachers = Teacher::query()->filter(request(['search']))->latest()->paginate(20);
         return view('teachers.index', [
             'teachers' => $teachers,
         ]);
