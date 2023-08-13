@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('student', StudentController::class);
 
-    Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
+    Route::resource('teacher', TeacherController::class);
     Route::get('/major/create', [MajorController::class, 'create'])->name('major.create');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

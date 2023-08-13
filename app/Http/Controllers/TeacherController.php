@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -13,7 +14,10 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::query()->latest()->paginate(20);
+        return view('teachers.index', [
+            'teachers' => $teachers,
+        ]);
     }
 
     /**
@@ -21,7 +25,10 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teachers.create');
+        $majors = Major::query()->get();
+        return view('teachers.create', [
+            'majors' => $majors,
+        ]);
     }
 
     /**
@@ -29,7 +36,22 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'dob' => ['required'],
+            'pob' => ['required'],
+            'address' => ['required'],
+            'phone_number' => ['required', 'numeric'],
+            'gender' => ['required'],
+            'email' => ['required', 'unique:' . Teacher::class],
+            'major_id' => ['required'],
+            'subject' => ['required'],
+        ]);
+
+        Teacher::create($validated);
+
+        return redirect(route('teacher.index'));
     }
 
     /**
@@ -45,7 +67,11 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        $majors = Major::query()->get();
+        return view('teachers.edit', [
+            'teacher' => $teacher,
+            'majors' => $majors,
+        ]);
     }
 
     /**
@@ -53,7 +79,22 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        $validated = $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'dob' => ['required'],
+            'pob' => ['required'],
+            'address' => ['required'],
+            'phone_number' => ['required', 'numeric'],
+            'gender' => ['required'],
+            'email' => ['required'],
+            'major_id' => ['required'],
+            'subject' => ['required'],
+        ]);
+
+        $teacher->update($validated);
+
+        return redirect(route('teacher.index'));
     }
 
     /**
@@ -61,6 +102,8 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete();
+
+        return redirect(route('teacher.index'));
     }
 }

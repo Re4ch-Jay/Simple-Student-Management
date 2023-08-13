@@ -56,7 +56,7 @@
                               </a>
                            </li>
                           <x-dashboard.dropdown name="Student" url_create="{{ route('student.create') }}" url_info="{{ route('student.index') }}"/>
-                          <x-dashboard.dropdown name="Teacher" url_create="{{ route('teacher.create') }}" url_info="#"/>
+                          <x-dashboard.dropdown name="Teacher" url_create="{{ route('teacher.create') }}" url_info="{{ route('teacher.index') }}"/>
                           <x-dashboard.dropdown name="Major" url_create="{{ route('major.create') }}" url_info="#"/>
                          <li>
                              <x-buttons.logout/>
