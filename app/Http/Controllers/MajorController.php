@@ -13,7 +13,10 @@ class MajorController extends Controller
      */
     public function index()
     {
-        //
+        $majors = Major::query()->latest()->paginate(20);
+        return view('majors.index', [
+            'majors' => $majors,
+        ]);
     }
 
     /**
@@ -29,7 +32,14 @@ class MajorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'unique:majors,name'],
+            'description' => ['required', 'string'],
+        ]);
+
+        Major::create($validated);
+
+        return redirect(route('major.index'));
     }
 
     /**
@@ -45,7 +55,9 @@ class MajorController extends Controller
      */
     public function edit(Major $major)
     {
-        //
+        return view('majors.edit', [
+            'major' => $major,
+        ]);
     }
 
     /**
@@ -53,7 +65,14 @@ class MajorController extends Controller
      */
     public function update(Request $request, Major $major)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string'],
+            'description' => ['required', 'string'],
+        ]);
+
+        $major->update($validated);
+
+        return redirect(route('major.index'));
     }
 
     /**
@@ -61,6 +80,8 @@ class MajorController extends Controller
      */
     public function destroy(Major $major)
     {
-        //
+        $major->delete();
+
+        return redirect(route('major.index'));
     }
 }

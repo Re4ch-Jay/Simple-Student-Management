@@ -28,7 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('student', StudentController::class);
 
     Route::resource('teacher', TeacherController::class);
-    Route::get('/major/create', [MajorController::class, 'create'])->name('major.create');
+    Route::resource('major', MajorController::class);
+    // Route::get('/major/create', [MajorController::class, 'create'])->name('major.create');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
