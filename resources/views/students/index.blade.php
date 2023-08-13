@@ -2,7 +2,7 @@
     <x-header name="Students List"/>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         NO
@@ -42,35 +42,35 @@
             </thead>
             <tbody>
                 @foreach ($students as $student)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <tr class="bg-white border-b dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $loop->iteration}}
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $student->id }}
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $student->last_name }} {{ $student->first_name }} 
                         </th>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 font-medium text-gray-900">
                             {{ $student->gender }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 font-medium text-gray-900">
                             {{ $student->email }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $student->phone_number }}
                         </td>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $student->major->name }}
                         </th>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $student->dob }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 font-medium text-gray-900">
                             {{ $student->address }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 font-medium text-gray-900">
                             {{ $student->pob }}
                         </td>
                         <td class="px-6 py-4 flex justify-between gap-2">
