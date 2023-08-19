@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-
+use App\Models\User;
+use App\Models\Major;
+use App\Models\Student;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -42,7 +44,12 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
-{
-    // ..
+function asAdmin():TestCase {
+    $admin = User::factory()->create();
+
+    return test()->actingAs($admin);
+}
+
+function getMajor() {
+    return Major::factory()->create();
 }

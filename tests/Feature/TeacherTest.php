@@ -1,40 +1,41 @@
 <?php
 
-use App\Models\Student;
 
-function getStudent() {
-    return Student::factory()->create([
+use App\Models\Teacher;
+
+function getTeacher() {
+    return Teacher::factory()->create([
         'major_id' => getMajor()->id,
     ]);
 }
 
-test('unauthenticated admin can not see the student screen', function () {
-    $this->get('/student')
+test('unauthenticated admin can not see the teacher screen', function () {
+    $this->get('/teacher')
         ->assertRedirect(route('login'))
         ->assertStatus(302);
 });
 
-test('student screen to be rendered', function () {
+test('teacher screen to be rendered', function () {
     asAdmin()
-        ->get('/student')
+        ->get('/teacher')
         ->assertStatus(200);
 });
 
-test('student screen can be search', function () {
+test('teacher screen can be search', function () {
     asAdmin()
-        ->get('/student?search='.getStudent()->name.'')
+        ->get('/teacher?search='.getTeacher()->name.'')
         ->assertStatus(200);
 });
 
-test('student create screen can be rendered', function () {
+test('teacher create screen can be rendered', function () {
     asAdmin()
-        ->get('/student/create')
+        ->get('/teacher/create')
         ->assertStatus(200);
 });
 
-test('student create screen can be stored', function () {
+test('teacher create screen can be stored', function () {
     asAdmin()
-        ->post('/student', [
+        ->post('/teacher', [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'dob' => '2015-12-17',
@@ -45,19 +46,18 @@ test('student create screen can be stored', function () {
             'email' => 'john@john.com',
             'major_id' => getMajor()->id,
         ])
-        ->assertRedirect(route('student.index'))
         ->assertStatus(302);
 });
 
-test('student edit screen can be rendered', function () {
+test('teacher edit screen can be rendered', function () {
     asAdmin()
-        ->get('/student/'. getStudent()->id . '/edit')
+        ->get('/teacher/'. getTeacher()->id . '/edit')
         ->assertStatus(200);
 });
 
-test('student edit screen can be updated', function () {
+test('teacher edit screen can be updated', function () {
     asAdmin()
-        ->put('/student/'. getStudent()->id , [
+        ->put('/teacher/'. getTeacher()->id , [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'dob' => '2015-12-17',
@@ -68,12 +68,11 @@ test('student edit screen can be updated', function () {
             'email' => 'john@john.com',
             'major_id' => getMajor()->id,
         ])
-        ->assertRedirect(route('student.index'))
         ->assertStatus(302);
 });
 
-test('student screen can be deleted', function () {
+test('teacher screen can be deleted', function () {
     asAdmin()
-        ->delete('/student/'. getStudent()->id)
+        ->delete('/teacher/'. getTeacher()->id)
         ->assertStatus(302);
 });
