@@ -5,16 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Http\Controllers\Controller;
 use App\Models\Major;
+use App\Services\StudentService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class StudentController extends Controller
 {
+    public function __construct(public StudentService $studentService) {
+
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index():View
     {
-        $students = Student::query()->filter(request(['search']))->latest()->paginate(20);
+
+        $students = $this->studentService->getStudents();
 
         return view('students.index', [
             'students' => $students,
@@ -24,7 +31,7 @@ class StudentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create():View
     {
         $majors = Major::query()->get();
         return view('students.create', [
@@ -35,23 +42,11 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
-        $validated = $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'dob' => ['required'],
-            'pob' => ['required'],
-            'address' => ['required'],
-            'phone_number' => ['required', 'numeric'],
-            'gender' => ['required'],
-            'email' => ['required', 'unique:' . Student::class],
-            'major_id' => ['required'],
-        ]);
-
-        Student::create($validated);
-
+        $this->studentService->createStudent($request);
         return redirect(route('student.index'));
+
     }
 
     /**
@@ -65,7 +60,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(Student $student):View
     {
         $majors = Major::query()->get();
         return view('students.edit', [
@@ -77,31 +72,20 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, Student $student):RedirectResponse
     {
-        $validated = $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'dob' => ['required'],
-            'pob' => ['required'],
-            'address' => ['required'],
-            'phone_number' => ['required', 'numeric'],
-            'gender' => ['required'],
-            'email' => ['required'],
-            'major_id' => ['required'],
-        ]);
-
-        $student->update($validated);
+        $this->studentService->updateStudent($request, $student);
 
         return redirect(route('student.index'));
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(Student $student):RedirectResponse
     {
-        $student->delete();
+        $this->studentService->destroyStudent($student);
 
         return back();
     }

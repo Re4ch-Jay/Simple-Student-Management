@@ -7,19 +7,18 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Teacher;
+use App\Services\DashboardService;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
-        $students = Student::query()->get()->count();
-        $majors = Major::query()->get()->count();
-        $teachers = Teacher::query()->get()->count();
+    public function __construct(public DashboardService $dashboardService) {
 
-        return view('dashboard', [
-            'students' => $students,
-            'majors' => $majors,
-            'teachers' => $teachers,
-        ]);
+    }
+    public function index():View
+    {
+        $data = $this->dashboardService->getDashboard();
+
+        return view('dashboard', $data);
     }
 }
